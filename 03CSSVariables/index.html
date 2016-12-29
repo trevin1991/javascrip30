@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scooped CSS Variables and JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" id="spacing" name="spacing" min="10" max="200" value="10" data-sizing="px">
+        <label for="blur">Blur:</label>
+        <input type="range" id="blur" name="blur" min="0" max="25" value="10" data-sizing="px">
+        <label for="base">Base Color:</label>
+        <input type="color" id="base" name="base" value="#ffc600">
+    </div>
+
+    <img src="http://unsplash.it/800/500?image=899" alt="img">
+
+    <script>
+        (function() {
+            const inputs = document.querySelectorAll(".controls input");
+            inputs.forEach(input => {
+                input.addEventListener("change", handleUpdate);
+                input.addEventListener("mousemove", handleUpdate);
+            });
+
+            function handleUpdate(ev) {
+                const suffix = ev.target.dataset.sizing || "";
+                document.documentElement.style.setProperty(`--${ev.target.name}`, `${ev.target.value}${suffix}`);
+            }
+        })();
+    </script>
+</body>
+</html>
